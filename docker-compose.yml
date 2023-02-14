@@ -1,0 +1,30 @@
+---
+version: '2'
+
+services:
+  facade-service:
+    build: ./facade-service
+    depends_on:
+      - logging-service
+      - messages-service
+    environment:
+      - HOST=0.0.0.0
+      - LOGGING_PORT=5001
+      - MESSAGES_PORT=5002
+    ports:
+      - '5000:5000'
+
+  logging-service:
+    build: ./logging-service
+    volumes:
+      - app:/code
+    ports:
+      - '5001:5001'
+
+  messages-service:
+    build: ./messages-service
+    ports:
+      - '5002:5002'
+
+volumes:
+  app:
