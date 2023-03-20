@@ -1,0 +1,31 @@
+version: '3.8'
+services:
+  hazelcast-node-1:
+    image: hazelcast/hazelcast:5.2.1
+    ports:
+      - '5701:5701'
+    environment:
+      - HZ_NETWORK_PORT=5701
+      - HZ_NETWORK_JOIN=hazelcast-node-2,hazelcast-node-3
+  hazelcast-node-2:
+    image: hazelcast/hazelcast:5.2.1
+    ports:
+      - '5702:5701'
+    environment:
+      - HZ_NETWORK_PORT=5702
+      - HZ_NETWORK_JOIN=hazelcast-node-1,hazelcast-node-3
+  hazelcast-node-3:
+    image: hazelcast/hazelcast:5.2.1
+    ports:
+      - '5703:5701'
+    environment:
+      - HZ_NETWORK_PORT=5703
+      - HZ_NETWORK_JOIN=hazelcast-node-1,hazelcast-node-2
+
+  management-center:
+    image: hazelcast/management-center:5.2.1
+    ports:
+      - '8080:8080'
+    environment:
+      - MC_DEFAULT_CLUSTER=dev
+      - MC_DEFAULT_CLUSTER_MEMBERS=hazelcast-node-1,hazelcast-node-2,hazelcast-node-3
