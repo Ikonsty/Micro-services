@@ -1,0 +1,9 @@
+com/example/HazelWithoutLocking$Value.class
+com/example/HazelOptimistic.class
+com/example/HazelOptimistic$Value.class
+com/example/HazelWithoutLocking.class
+com/example/ConsumerBQ.class
+com/example/ProducerBQ.class
+com/example/HazelPessimistic.class
+com/example/HazelOne.class
+com/example/HazelPessimistic$Value.class

@@ -1,2 +1,7 @@
-/home/ilya/UCU/Grade3/Sem2/SoftwareArchitecture/lab2/demo/src/main/java/com/example/Hazel.java
-/home/ilya/UCU/Grade3/Sem2/SoftwareArchitecture/lab2/demo/src/main/java/com/example/App.java
+/home/ilya/UCU/Grade3/Sem2/SoftwareArchitecture/lab2/demo/src/main/java/com/example/HazelOptimistic.java
+/home/ilya/UCU/Grade3/Sem2/SoftwareArchitecture/lab2/demo/src/main/java/com/example/HazelWithoutLocking.java
+/home/ilya/UCU/Grade3/Sem2/SoftwareArchitecture/lab2/demo/src/main/java/com/example/HazelPessimistic.java
+/home/ilya/UCU/Grade3/Sem2/SoftwareArchitecture/lab2/demo/src/main/java/com/example/run/HazelLockingTest.java
+/home/ilya/UCU/Grade3/Sem2/SoftwareArchitecture/lab2/demo/src/main/java/com/example/HazelOne.java
+/home/ilya/UCU/Grade3/Sem2/SoftwareArchitecture/lab2/demo/src/main/java/com/example/ProducerBQ.java
+/home/ilya/UCU/Grade3/Sem2/SoftwareArchitecture/lab2/demo/src/main/java/com/example/ConsumerBQ.java
