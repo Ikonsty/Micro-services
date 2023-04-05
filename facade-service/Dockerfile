@@ -8,4 +8,4 @@ RUN pip install -r requirements.txt
 
 EXPOSE 5000
 
-CMD ["python", "-u", "facade-service.py"]
+CMD ["python", "-u", "facade_application.py"]
