@@ -2,89 +2,118 @@
 version: '3'
 
 services:
+  rabbitmq:
+    image: rabbitmq:3-management
+    # ports:
+    #   - '5672:5672'
+    #   - '15672:15672'
+    networks:
+      - microservices-lab-network
+
   facade-service:
     build: ./facade-service
     depends_on:
-      - logging-service-1
-      - logging-service-2
-      - logging-service-3
+      - rabbitmq
+      # - logging-service-1
+      # - logging-service-2
+      # - logging-service-3
       - messages-service
     environment:
+      - PORT=5000
       - HOST=0.0.0.0
-      - LOGGING_PORT_1=8080
-      - LOGGING_PORT_2=8081
-      - LOGGING_PORT_3=8082
+      - Q_NAME=common_msg
+      - RABBITMQ_HOST=rabbitmq
+      - RABBITMQ_PORT=5672
+      - MESSAGES_HOST=messages-service
       - MESSAGES_PORT=5002
     ports:
       - '5000:5000'
-
-  logging-service-1:
-    build: ./LoggingService
-    volumes:
-      - app:/code
-    ports:
-      - '8080:8080'
-    environment:
-      SERVER_PORT: 8080
-      HAZELCAST_CONFIG: |
-        <hazelcast>
-          <network>
-            <port>5701</port>
-            <join>
-              <multicast enabled="false" />
-              <tcp-ip>
-                <members>logging-service-1,logging-service-2,logging-service-3</members>
-              </tcp-ip>
-            </join>
-          </network>
-        </hazelcast>
-
-  logging-service-2:
-    build: ./LoggingService
-    volumes:
-      - app:/code
-    ports:
-      - '8081:8081'
-    environment:
-      SERVER_PORT: 8081
-      HAZELCAST_CONFIG: |
-        <hazelcast>
-          <network>
-            <port>5701</port>
-            <join>
-              <multicast enabled="false" />
-              <tcp-ip>
-                <members>logging-service-1,logging-service-2,logging-service-3</members>
-              </tcp-ip>
-            </join>
-          </network>
-        </hazelcast>
-
-  logging-service-3:
-    build: ./LoggingService
-    volumes:
-      - app:/code
-    ports:
-      - '8082:8082'
-    environment:
-      SERVER_PORT: 8082
-      HAZELCAST_CONFIG: |
-        <hazelcast>
-          <network>
-            <port>5701</port>
-            <join>
-              <multicast enabled="false" />
-              <tcp-ip>
-                <members>logging-service-1,logging-service-2,logging-service-3</members>
-              </tcp-ip>
-            </join>
-          </network>
-        </hazelcast>
+    networks:
+      - microservices-lab-network
 
   messages-service:
     build: ./messages-service
     ports:
       - '5002:5002'
+    depends_on:
+      - rabbitmq
+    environment:
+      - PORT=5002
+      - HOST=0.0.0.0
+      - Q_NAME=common_msg
+      - RABBITMQ_HOST=rabbitmq
+      - RABBITMQ_PORT=5672
+      - FACADE_HOST=facade-service
+      - FACADE_PORT=5000
+    networks:
+      - microservices-lab-network
+
+networks:
+  microservices-lab-network:
+    driver: bridge
 
 volumes:
   app:
+
+  # logging-service-1:
+  #   build: ./LoggingService
+  #   volumes:
+  #     - app:/code
+  #   ports:
+  #     - '8080:8080'
+  #   environment:
+  #     SERVER_PORT: 8080
+  #     HAZELCAST_CONFIG: |
+  #       <hazelcast>
+  #         <network>
+  #           <port>5701</port>
+  #           <join>
+  #             <multicast enabled="false" />
+  #             <tcp-ip>
+  #               <members>logging-service-1,logging-service-2,logging-service-3</members>
+  #             </tcp-ip>
+  #           </join>
+  #         </network>
+  #       </hazelcast>
+
+  # logging-service-2:
+  #   build: ./LoggingService
+  #   volumes:
+  #     - app:/code
+  #   ports:
+  #     - '8081:8081'
+  #   environment:
+  #     SERVER_PORT: 8081
+  #     HAZELCAST_CONFIG: |
+  #       <hazelcast>
+  #         <network>
+  #           <port>5701</port>
+  #           <join>
+  #             <multicast enabled="false" />
+  #             <tcp-ip>
+  #               <members>logging-service-1,logging-service-2,logging-service-3</members>
+  #             </tcp-ip>
+  #           </join>
+  #         </network>
+  #       </hazelcast>
+
+  # logging-service-3:
+  #   build: ./LoggingService
+  #   volumes:
+  #     - app:/code
+  #   ports:
+  #     - '8082:8082'
+  #   environment:
+  #     SERVER_PORT: 8082
+  #     HAZELCAST_CONFIG: |
+  #       <hazelcast>
+  #         <network>
+  #           <port>5701</port>
+  #           <join>
+  #             <multicast enabled="false" />
+  #             <tcp-ip>
+  #               <members>logging-service-1,logging-service-2,logging-service-3</members>
+  #             </tcp-ip>
+  #           </join>
+  #         </network>
+  #       </hazelcast>
