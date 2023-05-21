@@ -12,8 +12,6 @@ rabbit_port = os.environ.get("RABBITMQ_PORT")
 rabbit_host = os.environ.get("RABBITMQ_HOST")
 no_connection = True
 connection = None
-# f_port = os.environ.get("FACADE_PORT")
-# f_host = os.environ.get("FACADE_HOST")
 
 # q_name = str(sys.argv[1])
 while no_connection:
