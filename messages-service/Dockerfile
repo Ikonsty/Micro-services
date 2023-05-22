@@ -8,4 +8,4 @@ RUN pip install -r requirements.txt
 
 EXPOSE 5002
 
-CMD ["python", "-u", "messages-service.py"]
+CMD ["python", "-u", "messages_application.py"]
