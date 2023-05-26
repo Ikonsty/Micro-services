@@ -1,0 +1,7 @@
+{
+	"service": {
+		"name": "consul-client-facade",
+		"tags": ["go"],
+		"port": 5000
+	}
+}

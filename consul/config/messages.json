@@ -1,0 +1,7 @@
+{
+	"service": {
+		"name": "consul-client-messages",
+		"tags": ["go"],
+		"port": 5007
+	}
+}
