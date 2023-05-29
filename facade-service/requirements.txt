@@ -1,0 +1,6 @@
+flask
+flask-restful
+uuid
+requests
+pika
+python-consul
