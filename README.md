@@ -1,6 +1,7 @@
 # Micro-services
 
 ## To run
+Go to ./LoggingService and run $ mvn package 
 Go to the root directory of the project. Type: </br>
 $ docker-compose up --build
 
